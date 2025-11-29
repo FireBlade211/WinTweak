@@ -26,7 +26,7 @@ Here is a list of the currently unfinished tabs:
 The unfinished tabs are 6/14, making up 42.85% of the total tabs.
 
 # 💾 Installation
-Go to the [Releases](github.com/fireblade211/wintweak/releases) page, download the executable (**WinTweak_x64.exe** or **WinTweak_x86.exe**), and run it.
+Go to the [Releases](https://github.com/fireblade211/wintweak/releases) page, download the executable (**WinTweak_x64.exe** or **WinTweak_x86.exe**), and run it.
 
 # 🔧 Requirements
 - Windows 7 or later
