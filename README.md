@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="logo.png" alt="WinTweak Logo" />
+  <img src="logo.png" alt="WinTweak Logo" width="128" height="128" />
 </p>
 
 # <div align="center">WinTweak</div>
 WinTweak is an all-in-one program that allows you to tweak various settings in Windows through the registry that aren't visible in any built-in Windows settings panel. **WinTweak** uses a Win32 property sheet for its GUI base, meaning it looks like a native Windows settings panel.
 
 # 🖼️ Screenshot
-<img src="readme-screenshot.png" alt="Screenshot" />
+<img src="readme-screenshot.png" alt="Screenshot" width="255" height="464"/>
 
 # ✉️ License
 **WinTweak** is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
