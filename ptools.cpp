@@ -207,7 +207,7 @@ BOOL CALLBACK EnumUILangProcForErrorCodeChecker(LPTSTR lpLangId, LONG_PTR lParam
 	return TRUE;
 }
 
-LRESULT CALLBACK ToolsPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK ToolsPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static LPERRORCHECKSPLITITEMINFO _errorCheckSplitInfo;
 

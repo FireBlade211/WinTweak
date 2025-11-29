@@ -120,7 +120,7 @@ _Success_(return) bool IsProcessRunningByPath(_In_ const STD_TSTR& targetPath, _
 	return found;
 }
 
-LRESULT CALLBACK SettingsCplPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK SettingsCplPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static BOOL lastCheckState;
 	static INT lastCheckIndex;

@@ -171,7 +171,7 @@ void CALLBACK WinSATLaunchOnFinish(LPVOID param, BOOLEAN b)
 	WinSATDlgReadScores((HWND)param);
 }
 
-LRESULT CALLBACK WinSATDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK WinSATDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static HFONT hMainFont;
 
@@ -299,7 +299,7 @@ LRESULT CALLBACK WinSATDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 	return FALSE;
 }
 
-LRESULT CALLBACK SystemPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK SystemPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

@@ -7,4 +7,4 @@ typedef HRESULT(WINAPI* PFN_DwmSetWindowAttribute)(
 	DWORD cbAttribute
 	);
 
-LRESULT CALLBACK AboutPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK AboutPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);

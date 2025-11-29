@@ -81,7 +81,7 @@ LPCTSTR keys[54] = {
 	TEXT("Flip 3D")
 };
 
-LRESULT CALLBACK KeyboardPageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK KeyboardPageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

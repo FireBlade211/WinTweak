@@ -64,7 +64,7 @@ STD_TSTR RunCommandHidden(LPCTSTR cmdLine)
 }
 
 
-LRESULT CALLBACK LogonMessageDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK LogonMessageDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     switch (uMsg)
     {
@@ -180,7 +180,7 @@ LRESULT CALLBACK LogonMessageDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM
     return FALSE;
 }
 
-LRESULT CALLBACK BootLogonPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK BootLogonPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

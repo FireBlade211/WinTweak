@@ -24,7 +24,7 @@ BOOL CALLBACK DisableWindowsProc(HWND hwnd, LPARAM lParam)
 	return TRUE;
 }
 
-LRESULT CALLBACK Win11PageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK Win11PageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

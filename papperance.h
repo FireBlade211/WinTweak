@@ -6,4 +6,4 @@
 #pragma once
 #include <windows.h>
 
-LRESULT CALLBACK AppearancePageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK AppearancePageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);

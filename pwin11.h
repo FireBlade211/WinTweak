@@ -6,4 +6,4 @@
 #pragma once
 #include <windows.h>
 
-LRESULT CALLBACK Win11PageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK Win11PageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);

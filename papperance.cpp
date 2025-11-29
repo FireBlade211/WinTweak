@@ -16,7 +16,7 @@
 
 #define ID_CUSTACCENTCOLMENU_DELETE 2000
 
-LRESULT CALLBACK AppearancePageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK AppearancePageProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

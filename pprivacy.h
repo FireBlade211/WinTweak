@@ -1,4 +1,4 @@
 #pragma once
 #include <windows.h>
 
-LRESULT CALLBACK PrivacyPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK PrivacyPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);

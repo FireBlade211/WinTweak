@@ -1,4 +1,4 @@
 #pragma once
 #include <windows.h>
 
-LRESULT CALLBACK ExplorerPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK ExplorerPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);

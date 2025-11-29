@@ -3,7 +3,7 @@
 #include <shlobj.h>
 #include <tchar.h>
 
-LRESULT CALLBACK PowerPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK PowerPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

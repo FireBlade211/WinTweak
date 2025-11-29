@@ -1,4 +1,4 @@
-﻿#include "pnetwork.h"
+#include "pnetwork.h"
 #include "resource.h"
 #include <tchar.h>
 #include "utility.h"
@@ -26,7 +26,7 @@ typedef struct FIREWALLRULEINFO
 
 typedef FIREWALLRULEINFO* LPFIREWALLRULEINFO;
 
-LRESULT CALLBACK NetworkPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK NetworkPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

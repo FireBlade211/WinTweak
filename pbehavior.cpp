@@ -37,7 +37,7 @@ typedef INFOBEHAVIORADVANCEDSTRUCT* LPINFOBEHAVIORADVACEDSTRUCT;
 
 INFOBEHAVIORADVANCEDSTRUCT advStruct;
 
-LRESULT CALLBACK AdvDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK AdvDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
@@ -117,7 +117,7 @@ LRESULT CALLBACK AdvDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-LRESULT CALLBACK BehaviorPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK BehaviorPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static BOOL verticalMaximizeEnabled = TRUE;
 	static BOOL maximizeDragEnabled = TRUE;

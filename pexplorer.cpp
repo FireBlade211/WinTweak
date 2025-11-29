@@ -2,7 +2,7 @@
 #include "macro.h"
 #include "resource.h"
 
-LRESULT CALLBACK ExplorerPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK ExplorerPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{

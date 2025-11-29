@@ -76,11 +76,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ComCtl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ComCtl32.lib;wbemuuid.lib;Uxtheme.lib;HtmlHelp.lib;Shlwapi.lib;ole32.lib;oleaut32.lib;windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ManifestFile>WinTweak.manifest</ManifestFile>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
@@ -93,11 +94,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ComCtl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ComCtl32.lib;wbemuuid.lib;Uxtheme.lib;HtmlHelp.lib;Shlwapi.lib;ole32.lib;oleaut32.lib;windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ManifestFile>WinTweak.manifest</ManifestFile>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>

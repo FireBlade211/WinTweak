@@ -7,7 +7,7 @@
 #include "const.h"
 #include <strsafe.h>
 
-LRESULT CALLBACK AboutPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK AboutPageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
