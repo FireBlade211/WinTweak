@@ -5,6 +5,9 @@
 # <div align="center">WinTweak</div>
 WinTweak is an all-in-one program that allows you to tweak various settings in Windows through the registry that aren't visible in any built-in Windows settings panel. **WinTweak** uses a Win32 property sheet for its GUI base, meaning it looks like a native Windows settings panel.
 
+> [!TIP]
+> You can call the help button in the title bar at any time to get help about any tweak.
+
 # 🖼️ Screenshot
 <img src="readme-screenshot.png" alt="Screenshot" width="255" height="464"/>
 
