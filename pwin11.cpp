@@ -47,7 +47,7 @@ INT_PTR CALLBACK Win11PageProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 			{
 				build = _ttoi(tBufBuild);
 			}
-
+			
 			if (!(IsWindowsVersionOrGreater(10, 0, 0) && build >= 22000))
 			{
 				ShowDlgItem(hDlg, IDC_STATIC_WIN11NOTICE, SW_SHOW);
