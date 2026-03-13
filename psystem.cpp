@@ -18,6 +18,11 @@
 #include <winsatcominterfacei.h>
 #include <htmlhelp.h>
 
+EXTERN_C const CLSID CLSID_CInitiateWinSAT =
+{ 0x489331DC, 0xF5E0, 0x4528, {0x9F, 0xDA, 0x45, 0x33, 0x1B, 0xF4, 0xA5, 0x71} };
+
+#define WM_FREEWINSAT (WM_APP + 1)
+
 void WinSATDlgReadScores(HWND hDlg)
 {
 	OutputDebugString(TEXT("Reading scores start!\n"));
@@ -171,9 +176,58 @@ void CALLBACK WinSATLaunchOnFinish(LPVOID param, BOOLEAN b)
 	WinSATDlgReadScores((HWND)param);
 }
 
+void WinSatProgressDialogEvents::Init(HWND hwndOwner)
+{
+	hOwner = hwndOwner;
+
+	HRESULT hr = CoCreateInstance(CLSID_ProgressDialog, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pProgressDialog));
+
+	if (SUCCEEDED(hr))
+	{
+		pProgressDialog->SetTitle(L"System assesment");
+		pProgressDialog->StartProgressDialog(hwndOwner, NULL, PROGDLG_MODAL | PROGDLG_AUTOTIME | PROGDLG_NOMINIMIZE | PROGDLG_NOCANCEL, NULL);
+		pProgressDialog->Timer(PDTIMER_RESET, NULL);
+	}
+}
+
+STDMETHODIMP WinSatProgressDialogEvents::WinSATComplete(HRESULT hresult, LPCWSTR strDescription)
+{
+	if (pProgressDialog)
+	{
+		pProgressDialog->StopProgressDialog();
+		pProgressDialog->Release();
+		pProgressDialog = nullptr;
+	}
+
+	WCHAR bufDesc[256] = L"";
+	swprintf_s(bufDesc, 256, L"%s.", strDescription);
+
+	MessageBoxW(hOwner, bufDesc, L"System assesment", MB_ICONINFORMATION);
+	WinSATDlgReadScores(hOwner);
+
+	PostMessage(hOwner, WM_FREEWINSAT, NULL, (LPARAM)this);
+
+	return S_OK;
+}
+
+STDMETHODIMP WinSatProgressDialogEvents::WinSATUpdate(UINT uCurrentTick, UINT uTickTotal, LPCWSTR strCurrentState)
+{
+	if (pProgressDialog)
+	{
+		pProgressDialog->SetProgress64(uCurrentTick, uTickTotal);
+		pProgressDialog->SetLine(1, strCurrentState, FALSE, NULL);
+		pProgressDialog->SetLine(2, strCurrentState, FALSE, NULL); // in case it doesn't fit on the title
+	}
+	// we do not have anything to put on the other lines
+	// thats why we enabled time remaining
+
+	return S_OK;
+}
+
 INT_PTR CALLBACK WinSATDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static HFONT hMainFont;
+	static IInitiateWinSATAssessment* assesment;
 
 	switch (uMsg)
 	{
@@ -206,51 +260,79 @@ INT_PTR CALLBACK WinSATDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 			break;
 		case IDC_BUTTON_REFRESH_SATRATING:
 		{
-			TCHAR exePath[128];
-			ExpandEnvironmentStrings(TEXT("%SYSTEMROOT%\\System32\\winsat.exe"), exePath, ARRAYSIZE(exePath));
+			//TCHAR exePath[128];
+			//ExpandEnvironmentStrings(TEXT("%SYSTEMROOT%\\System32\\winsat.exe"), exePath, ARRAYSIZE(exePath));
 
-			TCHAR cmdLine[256];
-			_stprintf_s(cmdLine, ARRAYSIZE(cmdLine), TEXT("\"%s\" formal"), exePath); // quote in case of spaces
+			//TCHAR cmdLine[256];
+			//_stprintf_s(cmdLine, ARRAYSIZE(cmdLine), TEXT("\"%s\" formal"), exePath); // quote in case of spaces
 
-			TCHAR workDir[128];
-			ExpandEnvironmentStrings(TEXT("%SYSTEMROOT%\\System32"), workDir, ARRAYSIZE(workDir));
+			//TCHAR workDir[128];
+			//ExpandEnvironmentStrings(TEXT("%SYSTEMROOT%\\System32"), workDir, ARRAYSIZE(workDir));
 
-			STARTUPINFO si = {};
-			PROCESS_INFORMATION pi = {};
-			si.cb = sizeof(si);
+			//STARTUPINFO si = {};
+			//PROCESS_INFORMATION pi = {};
+			//si.cb = sizeof(si);
 
-			if (CreateProcess(
-				exePath,       // lpApplicationName
-				cmdLine,       // lpCommandLine (writable)
-				nullptr,
-				nullptr,
-				FALSE,
-				0,
-				nullptr,
-				workDir,       // current directory
-				&si,
-				&pi) && pi.hProcess != INVALID_HANDLE_VALUE)
+			//if (CreateProcess(
+			//	exePath,       // lpApplicationName
+			//	cmdLine,       // lpCommandLine (writable)
+			//	nullptr,
+			//	nullptr,
+			//	FALSE,
+			//	0,
+			//	nullptr,
+			//	workDir,       // current directory
+			//	&si,
+			//	&pi) && pi.hProcess != INVALID_HANDLE_VALUE)
+			//{
+			//	CloseHandle(pi.hThread); // no longer needed
+
+			//	EnableWindow(GetDlgItem(hDlg, IDOK), FALSE);
+			//	EnableWindow(GetDlgItem(hDlg, IDC_BUTTON_REFRESH_SATRATING), FALSE);
+
+			//	HANDLE hWait = nullptr;
+
+			//	RegisterWaitForSingleObject(
+			//		&hWait,
+			//		pi.hProcess,
+			//		WinSATLaunchOnFinish,
+			//		hDlg,
+			//		INFINITE,
+			//		WT_EXECUTEONLYONCE
+			//	);
+			//}
+
+			HRESULT hr = CoInitialize(0);
+			if (SUCCEEDED(hr))
 			{
-				CloseHandle(pi.hThread); // no longer needed
+				IInitiateWinSATAssessment* pInitWinSat;
+				hr = CoCreateInstance(CLSID_CInitiateWinSAT, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pInitWinSat));
 
-				EnableWindow(GetDlgItem(hDlg, IDOK), FALSE);
-				EnableWindow(GetDlgItem(hDlg, IDC_BUTTON_REFRESH_SATRATING), FALSE);
+				if (SUCCEEDED(hr))
+				{
+					WinSatProgressDialogEvents* events = new WinSatProgressDialogEvents();
+					events->Init(hDlg);
 
-				HANDLE hWait = nullptr;
+					// the events release themselves
+					pInitWinSat->InitiateFormalAssessment((IWinSATInitiateEvents*)events, hDlg);
 
-				RegisterWaitForSingleObject(
-					&hWait,
-					pi.hProcess,
-					WinSATLaunchOnFinish,
-					hDlg,
-					INFINITE,
-					WT_EXECUTEONLYONCE
-				);
+					pInitWinSat->AddRef();
+					assesment = pInitWinSat;
+				}
+				else
+					OutputDebugString(TEXT("Error")); // this is breakpointed for the debugging
+
+				CoUninitialize();
 			}
+
 			break;
 		}
 		}
 
+		break;
+	case WM_FREEWINSAT:
+		((WinSatProgressDialogEvents*)lParam)->Release();
+		assesment->Release();
 		break;
 	case WM_DRAWITEM:
 	{
@@ -267,7 +349,7 @@ INT_PTR CALLBACK WinSATDlgProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lPara
 
 					DrawThemeText(hTheme, lpDrawItem->hDC,
 						TEXT_MAININSTRUCTION, 0,
-						TEXT("Windows Experience Index"), -1,
+						L"Windows Experience Index", -1,
 						DT_SINGLELINE | DT_CENTER | DT_VCENTER,
 						0, &lpDrawItem->rcItem);
 					
